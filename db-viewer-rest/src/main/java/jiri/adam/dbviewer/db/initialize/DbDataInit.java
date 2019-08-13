@@ -20,15 +20,6 @@ public class DbDataInit {
     @PostConstruct
     void init() {
 
-        DbConnection dbConnection = new DbConnection();
-        dbConnection.setHostname("ia-sql01.trask.cz");
-        dbConnection.setName("Test MS SQL DB");
-        dbConnection.setUsername("bcuser");
-        dbConnection.setPassword("Password02");
-        dbConnection.setPort("1433");
-        dbConnection.setDatabaseName("USIGNDB_AKT");
-        dbConnectionService.saveOrUpdate(dbConnection);
-
         DbConnection dbConnection2 = new DbConnection();
         dbConnection2.setHostname("localhost");
         dbConnection2.setName("Some random DB");

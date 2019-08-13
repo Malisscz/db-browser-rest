@@ -1,0 +1,1 @@
+{"status":"OK","data":[{"id":2,"name":"Some random DB","hostname":"localhost","port":"1433","databaseName":"testDB","username":"bcuser","password":"Password02"},{"id":3,"name":"Some other random DB","hostname":"localhost","port":"1433","databaseName":"aaDB","username":"aauser","password":"Password01"}]}
