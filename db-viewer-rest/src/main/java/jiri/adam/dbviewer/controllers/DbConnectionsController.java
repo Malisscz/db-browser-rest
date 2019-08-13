@@ -81,27 +81,36 @@ public class DbConnectionsController {
     public JsonResponse create(@RequestBody DbConnection dbConnection) {
 
         log.debug("create");
+
+
+        if(dbConnection.getId()!=null){
+            return new JsonResponse("if id present, api /update should be called", null);
+        }
+
         dbConnectionService.saveOrUpdate(dbConnection);
+
 
 
         DbConnection dbConnectionFromDb = dbConnectionService.getDbConnection(dbConnection.getId());
 
-        JsonResponse response = new JsonResponse("saved under id " + dbConnection.getId(), dbConnectionFromDb);
-
-        return response;
+        return new JsonResponse("saved under id " + dbConnection.getId(), dbConnectionFromDb);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST, consumes = "*/*", produces = "application/json")
     public JsonResponse update(@RequestBody DbConnection dbConnection) {
 
         log.debug("update");
+
+        if(dbConnection.getId()==null){
+            return new JsonResponse("no id present", null);
+        }
+
+
         dbConnectionService.saveOrUpdate(dbConnection);
 
         DbConnection dbConnFromDb = dbConnectionService.getDbConnection(dbConnection.getId());
-        ;
 
-        JsonResponse response = new JsonResponse("updated conn " + dbConnection, dbConnFromDb);
 
-        return response;
+        return new JsonResponse("updated conn " + dbConnection.getId(), dbConnFromDb);
     }
 }
