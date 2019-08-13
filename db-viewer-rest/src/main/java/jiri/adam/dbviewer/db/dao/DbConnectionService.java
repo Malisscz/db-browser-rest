@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Simple DbConnection wrapper service using DAO object accessing DbConnections
+ */
 @Service
 public class DbConnectionService {
 

@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Wrapper for SQL injection and DbConnection entity
+ */
 @Data
 @Slf4j
 public class ConnectionHolder {
@@ -36,6 +39,12 @@ public class ConnectionHolder {
         this.closeOldConnection();
     }
 
+    /**
+     * Checks if provided schema is located within connection
+     * @param sqlService service object
+     * @param schema to be validated within connection
+     * @throws SQLException if schema doesnt exist, otherwise does nothing
+     */
     public void isValidSchema(JdbcSqlService sqlService, String schema) throws SQLException {
 
         SqlQueryResult databaseSchemas = sqlService.getDatabaseSchemas(connection);
@@ -50,6 +59,14 @@ public class ConnectionHolder {
 
     }
 
+
+    /**
+     * Checks if provided schema is located within connection
+     * @param sqlService service object
+     * @param schema to be validated within connection
+     * @param tableName table to be validated within schema
+     * @throws SQLException if schema doesnt exist, otherwise does nothing
+     */
     public void isValidTableWithinSchema(JdbcSqlService sqlService, String schema, String tableName) throws SQLException {
 
         //schema is valid at this point

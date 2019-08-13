@@ -1,6 +1,6 @@
 package jiri.adam.dbviewer.controllers;
 
-import jiri.adam.dbviewer.api.JsonResponse;
+import jiri.adam.dbviewer.model.JsonResponse;
 import jiri.adam.dbviewer.db.dao.DbConnectionService;
 import jiri.adam.dbviewer.db.nativesql.JdbcSqlService;
 import jiri.adam.dbviewer.db.nativesql.model.SqlQueryResult;
@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
-
+/**
+ * Endpoint implementing task 2
+ */
 @Slf4j
 @RestController
 @RequestMapping(value = "/browse")

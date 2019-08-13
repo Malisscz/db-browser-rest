@@ -1,7 +1,10 @@
-package jiri.adam.dbviewer.api;
+package jiri.adam.dbviewer.model;
 
 import lombok.Data;
 
+/**
+ * Wrapper holding status and generic data
+ */
 @Data
 public class JsonResponse {
 

@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * Pojo for holding result of one table's statistics
+ */
 @Data
 public class TableAggregationStatistics {
     String tableName;

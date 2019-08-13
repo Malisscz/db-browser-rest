@@ -2,6 +2,9 @@ package jiri.adam.dbviewer.db.nativesql.model;
 
 import lombok.Data;
 
+/**
+ * Hold one column's stats
+ */
 @Data
 public class ColumnStats {
     private String columnName;

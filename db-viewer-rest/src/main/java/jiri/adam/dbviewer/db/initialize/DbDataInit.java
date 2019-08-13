@@ -7,12 +7,16 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 
+
 @Configuration
 public class DbDataInit {
 
     @Autowired
     DbConnectionService dbConnectionService;
 
+    /**
+     * Some db data init
+     */
     @PostConstruct
     void init() {
 

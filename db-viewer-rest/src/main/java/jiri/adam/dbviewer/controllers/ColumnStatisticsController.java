@@ -1,11 +1,11 @@
 package jiri.adam.dbviewer.controllers;
 
-import jiri.adam.dbviewer.api.JsonResponse;
+import jiri.adam.dbviewer.model.JsonResponse;
 import jiri.adam.dbviewer.db.dao.DbConnectionService;
 import jiri.adam.dbviewer.db.nativesql.JdbcSqlService;
 import jiri.adam.dbviewer.db.nativesql.model.AggregationStatistics;
-import jiri.adam.dbviewer.db.nativesql.model.SqlQueryResult;
 import jiri.adam.dbviewer.db.nativesql.model.ColumnStats;
+import jiri.adam.dbviewer.db.nativesql.model.SqlQueryResult;
 import jiri.adam.dbviewer.db.nativesql.model.TableAggregationStatistics;
 import jiri.adam.dbviewer.session.ConnectionHolder;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,9 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-
+/**
+ * Endpoint implementing bonus task
+ */
 @Slf4j
 @RestController
 @RequestMapping(value = "/analytics")
@@ -51,7 +53,7 @@ public class ColumnStatisticsController {
 
         List<TableAggregationStatistics> tableStats = new LinkedList<>();
 
-        for(List<Object> tableInfo: tables.getRows()){
+        for (List<Object> tableInfo : tables.getRows()) {
             String tableName = (String) tableInfo.get(1);
 
             TableAggregationStatistics tableAggr = new TableAggregationStatistics();
@@ -60,12 +62,12 @@ public class ColumnStatisticsController {
             SqlQueryResult tableColumns = sqlService.getTableColumns(connection.getConnection(), schema, tableName);
             tableAggr.setColumnsCount(tableColumns.getColumnNames().size());
             tableAggr.setRowsCount(sqlService.countTableRows(connection.getConnection(), schema, tableName));
-            for(List<Object> columnInfo : tableColumns.getRows()){
+            for (List<Object> columnInfo : tableColumns.getRows()) {
 
                 String columnName = (String) columnInfo.get(2);
                 String columnType = (String) columnInfo.get(3);
 
-                if("bigint".equals(columnType) || "int".equals(columnType)){
+                if ("bigint".equals(columnType) || "int".equals(columnType)) {
                     ColumnStats columnStats = sqlService.getTableColumnStats(connection.getConnection(), schema, tableName, columnName);
                     columnStats.setColumnName(columnName);
                     tableColumnStats.add(columnStats);

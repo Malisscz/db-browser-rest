@@ -1,0 +1,154 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "status",
+    "data"
+  ],
+  "properties": {
+    "status": {
+      "$id": "#/properties/status",
+      "type": "string",
+      "title": "The Status Schema",
+      "default": "",
+      "examples": [
+        "OK"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "data": {
+      "$id": "#/properties/data",
+      "type": "object",
+      "title": "The Data Schema",
+      "required": [
+        "aggregationStatistics"
+      ],
+      "properties": {
+        "aggregationStatistics": {
+          "$id": "#/properties/data/properties/aggregationStatistics",
+          "type": "array",
+          "title": "The Aggregationstatistics Schema",
+          "items": {
+            "$id": "#/properties/data/properties/aggregationStatistics/items",
+            "type": "object",
+            "title": "The Items Schema",
+            "required": [
+              "tableName",
+              "rowsCount",
+              "columnsCount",
+              "columnStats"
+            ],
+            "properties": {
+              "tableName": {
+                "$id": "#/properties/data/properties/aggregationStatistics/items/properties/tableName",
+                "type": "string",
+                "title": "The Tablename Schema",
+                "default": "",
+                "examples": [
+                  "ATTACHMENT"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "rowsCount": {
+                "$id": "#/properties/data/properties/aggregationStatistics/items/properties/rowsCount",
+                "type": "integer",
+                "title": "The Rowscount Schema",
+                "default": 0,
+                "examples": [
+                  0
+                ]
+              },
+              "columnsCount": {
+                "$id": "#/properties/data/properties/aggregationStatistics/items/properties/columnsCount",
+                "type": "integer",
+                "title": "The Columnscount Schema",
+                "default": 0,
+                "examples": [
+                  7
+                ]
+              },
+              "columnStats": {
+                "$id": "#/properties/data/properties/aggregationStatistics/items/properties/columnStats",
+                "type": "array",
+                "title": "The Columnstats Schema",
+                "items": {
+                  "$id": "#/properties/data/properties/aggregationStatistics/items/properties/columnStats/items",
+                  "type": "object",
+                  "title": "The Items Schema",
+                  "required": [
+                    "columnName",
+                    "min",
+                    "rowsCount",
+                    "max",
+                    "avg",
+                    "median"
+                  ],
+                  "properties": {
+                    "columnName": {
+                      "$id": "#/properties/data/properties/aggregationStatistics/items/properties/columnStats/items/properties/columnName",
+                      "type": "string",
+                      "title": "The Columnname Schema",
+                      "default": "",
+                      "examples": [
+                        "ID"
+                      ],
+                      "pattern": "^(.*)$"
+                    },
+                    "min": {
+                      "$id": "#/properties/data/properties/aggregationStatistics/items/properties/columnStats/items/properties/min",
+                      "type": "null",
+                      "title": "The Min Schema",
+                      "default": null,
+                      "examples": [
+                        null
+                      ]
+                    },
+                    "rowsCount": {
+                      "$id": "#/properties/data/properties/aggregationStatistics/items/properties/columnStats/items/properties/rowsCount",
+                      "type": "null",
+                      "title": "The Rowscount Schema",
+                      "default": null,
+                      "examples": [
+                        null
+                      ]
+                    },
+                    "max": {
+                      "$id": "#/properties/data/properties/aggregationStatistics/items/properties/columnStats/items/properties/max",
+                      "type": "null",
+                      "title": "The Max Schema",
+                      "default": null,
+                      "examples": [
+                        null
+                      ]
+                    },
+                    "avg": {
+                      "$id": "#/properties/data/properties/aggregationStatistics/items/properties/columnStats/items/properties/avg",
+                      "type": "null",
+                      "title": "The Avg Schema",
+                      "default": null,
+                      "examples": [
+                        null
+                      ]
+                    },
+                    "median": {
+                      "$id": "#/properties/data/properties/aggregationStatistics/items/properties/columnStats/items/properties/median",
+                      "type": "null",
+                      "title": "The Median Schema",
+                      "default": null,
+                      "examples": [
+                        null
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

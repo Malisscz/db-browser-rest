@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * Wrapper for List of aggretation stats
+ */
 @Data
 public class AggregationStatistics {
 

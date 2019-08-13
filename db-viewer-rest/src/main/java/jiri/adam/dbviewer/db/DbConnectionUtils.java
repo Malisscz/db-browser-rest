@@ -11,6 +11,12 @@ import java.util.Properties;
 @Slf4j
 public class DbConnectionUtils {
 
+    /**
+     * Builds JDBC connection to Microsoft SQL Server database
+     * @param dbConnection entity to read connection info from
+     * @return the JDBC Connection
+     * @throws SQLException
+     */
     public static Connection buildConnection(DbConnection dbConnection) throws SQLException {
 
         Connection conn = null;

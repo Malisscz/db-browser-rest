@@ -9,8 +9,3 @@ CREATE TABLE DB_CONNECTION (
                               hostname VARCHAR(255) NOT NULL,
                               port VARCHAR(255) NOT NULL
 );
-/*
-INSERT INTO DB_CONNECTION (name, full_url, type) VALUES
-('Standardni H2', 'Dangote', 'Billionaire Industrialist'),
-('Nevim', 'Gates', 'MySQL'),
-('Folrunsho', 'Alakija', 'h2');*/

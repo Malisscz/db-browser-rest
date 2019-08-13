@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Entity for holding DB connections
+ */
 @Entity
 @Table(name = "DB_CONNECTION")
 @Data

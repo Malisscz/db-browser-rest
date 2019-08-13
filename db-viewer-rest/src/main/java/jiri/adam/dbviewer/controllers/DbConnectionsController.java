@@ -1,6 +1,6 @@
 package jiri.adam.dbviewer.controllers;
 
-import jiri.adam.dbviewer.api.JsonResponse;
+import jiri.adam.dbviewer.model.JsonResponse;
 import jiri.adam.dbviewer.db.DbConnectionUtils;
 import jiri.adam.dbviewer.db.dao.DbConnectionService;
 import jiri.adam.dbviewer.db.entity.DbConnection;
@@ -16,6 +16,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 
+
+/**
+ * Endpoint implementing task 1
+ */
 @Slf4j
 @RestController
 public class DbConnectionsController {
