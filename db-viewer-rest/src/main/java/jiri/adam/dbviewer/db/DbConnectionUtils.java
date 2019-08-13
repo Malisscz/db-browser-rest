@@ -2,9 +2,7 @@ package jiri.adam.dbviewer.db;
 
 import jiri.adam.dbviewer.db.entity.DbConnection;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

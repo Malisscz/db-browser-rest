@@ -7,10 +7,12 @@ import jiri.adam.dbviewer.db.nativesql.model.SqlQueryResult;
 import jiri.adam.dbviewer.session.ConnectionHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 
@@ -32,15 +34,13 @@ public class SchemaBrowserController {
 
         ConnectionHolder connection = (ConnectionHolder) session.getAttribute("connection");
 
-        if(connection==null){
+        if (connection == null) {
             return new JsonResponse("login-required", "you must call /connect/{connectionId} first");
         }
 
         SqlQueryResult resultRow = sqlService.getDatabaseSchemas(connection.getConnection());
 
-        JsonResponse response = new JsonResponse("OK", resultRow);
-
-        return response;
+        return new JsonResponse("OK", resultRow);
     }
 
 
@@ -51,15 +51,13 @@ public class SchemaBrowserController {
 
         ConnectionHolder connection = (ConnectionHolder) session.getAttribute("connection");
 
-        if(connection==null){
+        if (connection == null) {
             return new JsonResponse("login-required", "you must call /connect/{connectionId} first or call /browse/schema/{connectionId}");
         }
 
         SqlQueryResult resultRow = sqlService.getSchemaTables(connection.getConnection(), schemaName);
 
-        JsonResponse response = new JsonResponse("OK", resultRow);
-
-        return response;
+        return new JsonResponse("OK", resultRow);
     }
 
 
@@ -68,15 +66,13 @@ public class SchemaBrowserController {
 
         ConnectionHolder connection = (ConnectionHolder) session.getAttribute("connection");
 
-        if(connection==null){
+        if (connection == null) {
             return new JsonResponse("login-required", "you must call /connect/{id} first");
         }
 
-        SqlQueryResult resultRow = sqlService.getTableColumns(connection.getConnection(),schema, tableName);
+        SqlQueryResult resultRow = sqlService.getTableColumns(connection.getConnection(), schema, tableName);
 
-        JsonResponse response = new JsonResponse("OK", resultRow);
-
-        return response;
+        return new JsonResponse("OK", resultRow);
     }
 
     @RequestMapping(value = "/data/{schema}/{tableName}", method = RequestMethod.GET, consumes = "*/*", produces = "application/json")
@@ -84,14 +80,18 @@ public class SchemaBrowserController {
 
         ConnectionHolder connection = (ConnectionHolder) session.getAttribute("connection");
 
-        if(connection==null){
+        if (connection == null) {
             return new JsonResponse("login-required", "you must call /connect/{id} first");
         }
 
+        log.trace("validating sql injection based on schema metadata ...");
+        connection.isValidSchema(sqlService, schema);
+        connection.isValidTableWithinSchema(sqlService, schema, tableName);
+        log.trace("valid");
+
         SqlQueryResult results = sqlService.getTableRawData(connection.getConnection(), schema, tableName);
 
-        JsonResponse response = new JsonResponse("OK", results);
-        return response;
+        return new JsonResponse("OK", results);
     }
 
 }

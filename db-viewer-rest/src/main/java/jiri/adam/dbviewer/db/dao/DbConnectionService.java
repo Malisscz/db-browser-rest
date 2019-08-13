@@ -2,7 +2,6 @@ package jiri.adam.dbviewer.db.dao;
 
 import jiri.adam.dbviewer.db.entity.DbConnection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;

@@ -2,8 +2,8 @@ package jiri.adam.dbviewer.controllers;
 
 import jiri.adam.dbviewer.api.JsonResponse;
 import jiri.adam.dbviewer.db.DbConnectionUtils;
-import jiri.adam.dbviewer.db.entity.DbConnection;
 import jiri.adam.dbviewer.db.dao.DbConnectionService;
+import jiri.adam.dbviewer.db.entity.DbConnection;
 import jiri.adam.dbviewer.db.nativesql.JdbcSqlService;
 import jiri.adam.dbviewer.session.ConnectionHolder;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -28,17 +29,12 @@ public class DbConnectionsController {
     @RequestMapping(value = "/getDatabaseConnections", method = RequestMethod.GET, consumes = "*/*", produces = "application/json")
     public JsonResponse getDatabaseConnections() {
 
-        log.debug("test");
-
-
+        log.debug("getDatabaseConnections");
 
         List<DbConnection> dbConnections = dbConnectionService.getDbConnections();
 
-        JsonResponse response = new JsonResponse("OK", dbConnections);
-
-        return response;
+        return new JsonResponse("OK", dbConnections);
     }
-
 
 
     @RequestMapping(value = "/connect/{dbConnectionId}", method = RequestMethod.GET, consumes = "*/*", produces = "application/json")
@@ -49,9 +45,9 @@ public class DbConnectionsController {
 
         ConnectionHolder sessionConnection = (ConnectionHolder) session.getAttribute("connection");
 
-        if(sessionConnection!=null){
+        if (sessionConnection != null) {
             sessionConnection.closeOldConnection();
-        }else{
+        } else {
             sessionConnection = new ConnectionHolder();
         }
 
@@ -60,11 +56,11 @@ public class DbConnectionsController {
         sessionConnection.setConnection(connection);
         sessionConnection.setConnectionInfo(dbConnection);
 
-        session.setAttribute("connection" , sessionConnection);
+        session.setAttribute("connection", sessionConnection);
 
         log.debug("connected, fetching schema info");
 
-        JsonResponse response = new JsonResponse("Connected to " + dbConnection.getName() + " under schema "  +  connection.getCatalog(), null);
+        JsonResponse response = new JsonResponse("Connected to " + dbConnection.getName() + " under schema " + connection.getCatalog(), null);
 
         return response;
     }
@@ -101,7 +97,8 @@ public class DbConnectionsController {
         log.debug("update");
         dbConnectionService.saveOrUpdate(dbConnection);
 
-        DbConnection dbConnFromDb = dbConnectionService.getDbConnection(dbConnection.getId());;
+        DbConnection dbConnFromDb = dbConnectionService.getDbConnection(dbConnection.getId());
+        ;
 
         JsonResponse response = new JsonResponse("updated conn " + dbConnection, dbConnFromDb);
 

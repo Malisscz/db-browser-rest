@@ -10,7 +10,7 @@ public class JsonResponse {
 
     public JsonResponse(String status, Object data) {
         this.status = status;
-        this.data=data;
+        this.data = data;
     }
 
 }
